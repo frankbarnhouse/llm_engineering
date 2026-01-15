@@ -53,4 +53,5 @@ dependencies = [
     "jupyter>=1.1.1",
     "notebook>=7.5.1",
     "selenium>=4.39.0",
+    "langchain-google-genai>=4.2.0",
 ]

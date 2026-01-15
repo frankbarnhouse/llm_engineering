@@ -9,8 +9,8 @@ from tenacity import retry, wait_exponential
 
 load_dotenv(override=True)
 
-# MODEL = "openai/gpt-4.1-nano"
-MODEL = "groq/openai/gpt-oss-120b"
+MODEL = "openai/gpt-4.1-mini"
+# MODEL = "groq/openai/gpt-oss-120b"
 DB_NAME = str(Path(__file__).parent.parent / "preprocessed_db")
 KNOWLEDGE_BASE_PATH = Path(__file__).parent.parent / "knowledge-base"
 SUMMARIES_PATH = Path(__file__).parent.parent / "summaries"
@@ -103,6 +103,20 @@ Respond only with a short, refined question that you will use to search the Know
 It should be a VERY short specific question most likely to surface content. Focus on the question details.
 IMPORTANT: Respond ONLY with the precise knowledgebase query, nothing else.
 """
+#     message = f"""
+# You are in a conversation with a user, answering questions about the company Insurellm.
+# You are about to look up information in a Knowledge Base to answer the user's question.
+
+# This is the history of your conversation so far with the user:
+# {history}
+
+# And this is the user's current question:
+# {question}
+
+# Respond with a list of 10 short, refined questions that you will use to search the Knowledge Base.
+# It should be a VERY short specific question most likely to surface content. Focus on the question details.
+# IMPORTANT: Respond ONLY with the precise knowledgebase query, nothing else.
+# """
     response = completion(model=MODEL, messages=[{"role": "system", "content": message}])
     return response.choices[0].message.content
 
